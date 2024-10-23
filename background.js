@@ -9,14 +9,14 @@ ime.onBlur.addListener((_) => contextID = 0);
 ime.onKeyEvent.addListener((_, keyData, _) => {
   // if (keyData.evil) return false;
 
-  if (keyData.key == "a") {
-    (async () => {
-      keyData.key = "b";
-      await ime.sendKeyEvents({contextID, keyData: [keyData]});
-      ime.keyEventHandled();
-    })();
-    return undefined;
-  }
+  // if (keyData.key == "a") {
+  //   (async () => {
+  //     keyData.key = "b";
+  //     await ime.sendKeyEvents({contextID, keyData: [keyData]});
+  //     ime.keyEventHandled();
+  //   })();
+  //   return undefined;
+  // }
 
-  return false;
+  return true;
 });
