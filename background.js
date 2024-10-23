@@ -4,7 +4,7 @@ chrome.input.ime.onFocus.addListener((context) => contextID = context.contextID)
 
 chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 
-chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, _requestID) => {
+chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, requestID) => {
   if (keyData.evil) return false;
 
   if (keyData.key == "a") {
@@ -12,7 +12,7 @@ chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, _requestID) => {
       keyData.key = "b";
       keyData.evil = true;
       await chrome.input.ime.sendKeyEvents({contextID, keyData: [keyData]});
-      chrome.input.ime.keyEventHandled();
+      chrome.input.ime.keyEventHandled(requestID, true);
     })();
     return undefined;
   }
