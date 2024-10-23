@@ -1,15 +1,15 @@
 {
     "manifest_version": 3,
-    "name": "custom keyboard layout",
+    "name": "Custom Keyboard Layout Template",
     "version": "0.0.1",
     "permissions": [
         "input"
     ],
     "input_components": [
         {
-            "name": "Layout Name",
+            "name": "Dvorak Custom",
             "type": "ime",
-            "id": "layout_name",
+            "id": "dvorak_custom",
             "description": "A keyboard layout",
             "language": "en-US",
             "layouts": ["us"]
