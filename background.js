@@ -34,16 +34,30 @@ chrome.input.ime.onFocus.addListener((context) =>
 
 chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 
+var previousRequest;
+
 chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, requestID) => {
-  // let's not mess with modifiers, kay?
+  if (previousRequest == requestID) {
+    return false;
+  } else {
+    previousRequest = requestID;
+  }
+  // let's not mess with modifiers, 'kay?
   if (keyData.altKey || keyData.ctrlKey) return false;
 
   if (mapping.has(keyData.key)) {
     keyData.key = mapping.get(keyData.key);
     (async () => {
       // living in the future
-      await chrome.input.ime.sendKeyEvents({ contextID, keyData: [keyData] });
-      chrome.input.ime.keyEventHandled(requestID, true);
+      let handled = true;
+      try {
+        await chrome.input.ime.sendKeyEvents({ contextID, keyData: [keyData] });
+      } catch (e) {
+        console.error(e);
+        handled = false;
+      } finally {
+        chrome.input.ime.keyEventHandled(requestID, handled);
+      }
     })();
     return undefined;
   }
