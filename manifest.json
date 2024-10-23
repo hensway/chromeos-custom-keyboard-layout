@@ -14,5 +14,9 @@
             "language": "en-US",
             "layouts": ["us"]
         }
-    ]
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    }
 }
