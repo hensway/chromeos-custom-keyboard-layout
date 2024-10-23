@@ -37,6 +37,7 @@ chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 var previousRequest;
 
 chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, requestID) => {
+  console.log(keyData.key);
   if (previousRequest == requestID) {
     return false;
   } else {
