@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Focal Keyboard Layout",
+    "version": "0.0.1",
+    "permissions": [
+        "input"
+    ],
+    "input_components": [
+        {
+            "name": "Focal",
+            "type": "ime",
+            "id": "focal",
+            "description": "Focal layout by Keyhabit",
+            "language": "en-US",
+            "layouts": ["us"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    }
+}
