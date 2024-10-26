@@ -37,30 +37,18 @@ chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 var previousRequest;
 
 chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, requestID) => {
-  console.log(keyData.key);
-  if (previousRequest == requestID) {
-    return true;
-  } else {
-    previousRequest = requestID;
-  }
+  console.log(keyData.extensionID);
+
+  // attempt to not handle our own KeyEvents
+  if (keyData.extensionID) return false;
+
   // let's not mess with modifiers, 'kay?
   if (keyData.altKey || keyData.ctrlKey) return false;
 
   if (mapping.has(keyData.key)) {
     keyData.key = mapping.get(keyData.key);
-    (async () => {
-      // living in the future
-      let handled = true;
-      try {
-        await chrome.input.ime.sendKeyEvents({ contextID, keyData: [keyData] });
-      } catch (e) {
-        console.error(e);
-        handled = false;
-      } finally {
-        chrome.input.ime.keyEventHandled(requestID, handled);
-      }
-    })();
-    return undefined;
+    chrome.input.ime.sendKeyEvents({ contextID, keyData: [keyData] });
+    return true;
   }
 
   return false;
