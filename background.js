@@ -37,10 +37,10 @@ chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 var previousRequest;
 
 chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, requestID) => {
-  console.log(keyData.extensionID);
+  console.log(keyData.extensionId);
 
   // attempt to not handle our own KeyEvents
-  if (keyData.extensionID) return false;
+  if (keyData.extensionId) return false;
 
   // let's not mess with modifiers, 'kay?
   if (keyData.altKey || keyData.ctrlKey) return false;
