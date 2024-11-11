@@ -29,7 +29,8 @@ var contextID; // we'll see what uninitialized contextID can do!!!
 chrome.input.ime.onFocus.addListener((context) =>
   contextID = context.contextID);
 
-chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
+// i think this causes problems
+// chrome.input.ime.onBlur.addListener((_context) => contextID = 0);
 
 chrome.input.ime.onKeyEvent.addListener((_engineID, keyData, _requestID) => {
   // only handle original KeyboardEvents
